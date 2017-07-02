@@ -24,7 +24,7 @@ public class SmartRobot implements Robot {
 			throw new IllegalArgumentException("Illegal empty or null items.");
 		}
 		
-		List<Box> boxes = new ArrayList<Box>();
+		List<Box> boxes = new ArrayList<>();
 		
 		ClassifiedItems classifiedItems = new ClassifiedItems(items);
 		

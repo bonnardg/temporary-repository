@@ -17,7 +17,7 @@ public class Box {
 
 	public Box(int size) {
 		this.size = size;
-		this.items = new ArrayList<Integer>();
+		this.items = new ArrayList<>();
 		this.itemsSize = 0;
 	}
 	
@@ -30,17 +30,11 @@ public class Box {
 	}
 	
 	public boolean acceptItem(Integer item) {
-		if (itemsSize + item > size) {
-			return false;
-		}
-		return true;
+		return itemsSize + item <= size;
 	}
 	
 	public boolean isFull() {
-		if (itemsSize < size) {
-			return false;
-		}
-		return true;
+		return itemsSize == size;
 	}
 	
 	public int getItemsCount() {

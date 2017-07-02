@@ -11,7 +11,7 @@ public class ClassifiedItems {
 	SortedMap<Integer, Integer> countPerItem;
 
 	public ClassifiedItems(List<Integer> items) {
-		countPerItem = new TreeMap<Integer, Integer>();
+		countPerItem = new TreeMap<>();
 		classifyItems(items);
 	}
 	
@@ -30,11 +30,7 @@ public class ClassifiedItems {
 	}
 	
 	public boolean existItem(Integer item) {
-		Integer classifiedItem = countPerItem.get(item);
-		if (classifiedItem != null) {
-			return true;
-		}
-		return false;
+		return countPerItem.get(item) != null;
 	}
 	
 	public void removeItem(Integer item) {

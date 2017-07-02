@@ -11,7 +11,7 @@ public class BoxWorkingSet {
 	private SortedSet<Box> workingBoxes;
 
 	public BoxWorkingSet(Integer leadingItem, int workingBoxSize) {
-		this.workingBoxes = new TreeSet<Box>(BOX_ITEM_COUNT_ORDER);
+		this.workingBoxes = new TreeSet<>(BOX_ITEM_COUNT_ORDER);
 		Box leadingBox = new Box(workingBoxSize);
 		leadingBox.addItem(leadingItem);
 		workingBoxes.add(leadingBox);
