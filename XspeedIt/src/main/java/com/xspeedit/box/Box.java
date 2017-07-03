@@ -49,15 +49,5 @@ public class Box {
 		return itemsSize;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (Integer item : this.items) {
-			sb.append(item);
-		}
-		return sb.toString();
-	}
-	
-	
 	
 }

@@ -11,7 +11,11 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+	  <sonar.jacoco.reportPaths>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
+	  <sonar.junit.reportsPath>${project.basedir}/target/surefire-reports</sonar.junit.reportsPath>
+	  <sonar.surefire.reportsPath>${project.basedir}/target/surefire-reports</sonar.surefire.reportsPath>
   </properties>
   
   <build>
@@ -19,11 +23,39 @@
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.6.1</version>
             <configuration>
                 <source>1.7</source>
                 <target>1.7</target>
             </configuration>
         </plugin>
+	    <plugin>
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-surefire-plugin</artifactId>
+	      <version>2.18.1</version>
+	    </plugin>
+	    <plugin>
+	      <groupId>org.jacoco</groupId>
+	      <artifactId>jacoco-maven-plugin</artifactId>
+	      <version>0.7.9</version>
+	      <configuration>
+	        <append>true</append>
+	      </configuration>
+	      <executions>
+	        <execution>
+	          <goals>
+	            <goal>prepare-agent</goal>
+	          </goals>
+	        </execution>
+	        <execution>
+	          <id>post-unit-test</id>
+	          <phase>test</phase>
+	          <goals>
+	            <goal>report</goal>
+	          </goals>
+	        </execution>
+	      </executions>
+	    </plugin>
     </plugins>
   </build>
 
