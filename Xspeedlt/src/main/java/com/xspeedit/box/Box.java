@@ -10,15 +10,28 @@ public class Box {
 	
 	private int size;
 	
-	private List<Integer> items;
+	protected List<Integer> items;
 	
-	private int itemsSize;
-	
-
 	public Box(int size) {
 		this.size = size;
 		this.items = new ArrayList<>();
-		this.itemsSize = 0;
+	}
+	
+	public Box(Box box) {
+		this.size = box.getSize();
+		this.items = new ArrayList<>(box.getItems());
+	}
+	
+	public boolean acceptItem(Integer item) {
+		return getItemsSize() + item <= size;
+	}
+	
+	public boolean isFull() {
+		return getItemsSize() == size;
+	}
+	
+	public int getItemsCount() {
+		return this.items.size();
 	}
 	
 	public void addItem(Integer item) {
@@ -26,19 +39,14 @@ public class Box {
 			throw new IllegalArgumentException(String.format("Illegal item %d.", item));
 		}
 		items.add(item);
-		itemsSize += item;
 	}
 	
-	public boolean acceptItem(Integer item) {
-		return itemsSize + item <= size;
-	}
-	
-	public boolean isFull() {
-		return itemsSize == size;
-	}
-	
-	public int getItemsCount() {
-		return this.items.size();
+	public int getItemsSize() {
+		int itemsSize = 0;
+		for (Integer item : items) {
+			itemsSize += item;
+		}
+		return itemsSize;
 	}
 
 	@Override

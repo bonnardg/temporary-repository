@@ -8,7 +8,7 @@ import com.xspeedit.box.Box;
 
 public class ClassifiedItems {
 	
-	SortedMap<Integer, Integer> countPerItem;
+	protected SortedMap<Integer, Integer> countPerItem;
 
 	public ClassifiedItems(List<Integer> items) {
 		countPerItem = new TreeMap<>();
@@ -24,6 +24,9 @@ public class ClassifiedItems {
 	}
 	
 	private void classifyItems(List<Integer> items) {
+		if (items == null) {
+			throw new IllegalArgumentException("Illegal null items.");
+		}
 		for (Integer item : items) {
 			classifyItem(item);
 		}
@@ -42,8 +45,7 @@ public class ClassifiedItems {
 			countPerItem.remove(item);
 		} else {
 			countPerItem.put(item, countPerItem.get(item) - 1);
-		}
-		
+		}	
 	}
 	
 	public boolean existItems() {
@@ -51,6 +53,9 @@ public class ClassifiedItems {
 	}
 	
 	public Integer highestItem() {
+		if (countPerItem.isEmpty()) {
+			return null;
+		}
 		return countPerItem.lastKey();
 	}
 	

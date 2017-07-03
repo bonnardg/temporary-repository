@@ -22,9 +22,10 @@ public class BoxWorkingSet {
 			throw new IllegalArgumentException("Illegal null item.");
 		}
 		Box newWorkingBox;
-		for (Box workingBox : workingBoxes) {
+		SortedSet<Box> initialWorkingBoxes = new TreeSet<>(this.workingBoxes); 
+		for (Box workingBox : initialWorkingBoxes) {
 			if (workingBox.acceptItem(item)) {
-				newWorkingBox = workingBox;
+				newWorkingBox = new Box(workingBox);
 				newWorkingBox.addItem(item);
 				workingBoxes.add(newWorkingBox);
 				if (newWorkingBox.isFull()) {
@@ -45,7 +46,11 @@ public class BoxWorkingSet {
 	private static class BoxItemCountComparator implements Comparator<Box> {
 
 		public int compare(Box box1, Box box2) {
-			return Integer.compare(box1.getItemsCount(), box2.getItemsCount());
+			int countComparison = Integer.compare(box1.getItemsCount(), box2.getItemsCount());
+			if (countComparison == 0) {
+				return Integer.compare(box1.getItemsSize(), box2.getItemsSize());
+			}
+			return countComparison;
 		}
 
 	}
