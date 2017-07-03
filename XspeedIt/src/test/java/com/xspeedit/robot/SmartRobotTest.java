@@ -34,4 +34,16 @@ public class SmartRobotTest {
         assertEquals(8, boxes.size());
     }
 	
+	@Test
+    public void packItems_WhenMultipleItemsOtherCase_ThenSuccess() throws Exception {
+		// Given a smart robot
+		SmartRobot robot = new SmartRobot(10);
+		
+		// When packing items
+		List<Box> boxes = robot.packItems(Arrays.asList(new Integer[] {9, 5, 1, 6, 5, 2, 3, 5, 7, 8, 4, 1, 6, 8, 7, 8, 9, 5, 2, 5, 7, 1, 6, 6, 3, 7, 3}));
+		
+		// Then number of box is optimized
+        assertEquals(16, boxes.size());
+    }
+	
 }

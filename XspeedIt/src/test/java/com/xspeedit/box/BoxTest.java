@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.Test;
 
@@ -158,6 +159,66 @@ public class BoxTest {
 		box.addItem(3);
 		
 		// Then expecting IllegalArgumentException
+    }
+	
+	@Test
+    public void getComplementItems_WhenBoxFilledWithMultipleItems_ThenItems() throws Exception {
+		// Given a box with a size 10
+		Box box = FakeBox.builder().size(10)
+				// When the box has an several items in it
+				.items(Arrays.asList(new Integer[] {6, 2, 1}))
+				.build();
+		
+		// Then the box item size is the sum of items
+        assertEquals(Arrays.asList(new Integer[] {2, 1}), box.getComplementItems());
+    }
+	
+	@Test
+    public void getComplementItems_WhenBoxFilledWithOneItem_ThenNoItem() throws Exception {
+		// Given a box with a size 10
+		Box box = FakeBox.builder().size(10)
+				// When the box has an several items in it
+				.items(Arrays.asList(new Integer[] {6}))
+				.build();
+		
+		// Then the box item size is the sum of items
+        assertEquals(Collections.emptyList(), box.getComplementItems());
+    }
+	
+	@Test
+    public void getComplementItems_WhenBoxEmpty_ThenNoItem() throws Exception {
+		// Given a box with a size 10
+		Box box = FakeBox.builder().size(10)
+				// When the box is empty
+				.items(new ArrayList<Integer>())
+				.build();
+		
+		// Then the box item count is zero
+        assertEquals(Collections.emptyList(), box.getComplementItems());
+    }
+	
+	@Test
+    public void toString_WhenBoxEmpty_ThenEmpty() throws Exception {
+		// Given a box with a size 10
+		Box box = FakeBox.builder().size(10)
+				// When the box is empty
+				.items(new ArrayList<Integer>())
+				.build();
+		
+		// Then the box item count is zero
+        assertEquals("", box.toString());
+    }
+	
+	@Test
+    public void toString_WhenItems_ThenConcatenateItems() throws Exception {
+		// Given a box with a size 10
+		Box box = FakeBox.builder().size(10)
+				// When the box has items
+				.items(Arrays.asList(new Integer[] {6, 2, 1}))
+				.build();
+		
+		// Then concatenating the items
+        assertEquals("621", box.toString());
     }
 	
 }

@@ -10,8 +10,6 @@ import java.util.TreeMap;
 
 import org.junit.Test;
 
-import com.xspeedit.box.Box;
-
 public class ClassifiedItemsTest {
 
 	@Test
@@ -174,28 +172,26 @@ public class ClassifiedItemsTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void removeBoxItems_WhenBoxIsNull_ThenException() {
+	public void removeItems_WhenBoxIsNull_ThenException() {
 		// Given another item
 		List<Integer> items = new ArrayList<>();
 		
 		// When adding no item and trying to remove a null box
 		ClassifiedItems classifiedItems = new ClassifiedItems(items);
-		classifiedItems.removeBoxItems(null);
+		classifiedItems.removeItems(null);
 		
 		// Then throws exception
 	}
 	
 	@Test
-	public void removeBoxItems_WhenItemExists_ThenSuccess() {
-		// Given another item and a box with existing item
+	public void removeItems_WhenItemExists_ThenSuccess() {
+		// Given another item and a bunch of existing item
 		List<Integer> items =  Arrays.asList(new Integer[] {1, 1, 3, 4});
 		ClassifiedItems classifiedItems = FakeClassifiedItems.builder().items(items).build();
-		Box box = new Box(10);
-		box.addItem(1);
-		box.addItem(4);
+		List<Integer> existingItems =  Arrays.asList(new Integer[] {1, 4});
 		
 		// When removing the box items
-		classifiedItems.removeBoxItems(box);
+		classifiedItems.removeItems(existingItems);
 		
 		// Then the item are removed
 		SortedMap<Integer, Integer> expectedSortedItems = new TreeMap<>();
